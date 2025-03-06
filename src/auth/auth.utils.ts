@@ -26,3 +26,15 @@ export const allowedRolesForUpdateArray = (loggedInUser?: IAuthUser): string[] =
         ? [RolesEnum.ADMIN, RolesEnum.MANAGER, RolesEnum.USER]
         : [RolesEnum.MANAGER, RolesEnum.USER];
 };
+
+// we need to control that Owner can not change owner role
+// Also, admin can not change owner role and admin role
+export const isAuthorizedForUpdateRole = (loggedInUserRole: string, selectedUserRole: string) => {
+    let result = true;
+    if (loggedInUserRole === RolesEnum.OWNER && selectedUserRole === RolesEnum.OWNER) {
+        result = false;
+    } else if (loggedInUserRole === RolesEnum.ADMIN && (selectedUserRole === RolesEnum.OWNER || selectedUserRole === RolesEnum.ADMIN)) {
+        result = false;
+    }
+    return result;
+};
