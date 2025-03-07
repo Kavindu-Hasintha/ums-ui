@@ -9,7 +9,7 @@ import {createContext, ReactNode, useCallback, useEffect, useReducer} from "reac
 import {useNavigate} from "react-router-dom";
 import {getSession, setSession} from "./auth.utils.ts";
 import axiosInstance from "../utils/axiosInstance.ts";
-import {ME_URL, PATH_AFTER_REGISTER, REGISTER_URL} from "../utils/globalConfig.ts";
+import {LOGIN_URL, ME_URL, PATH_AFTER_LOGIN, PATH_AFTER_REGISTER, REGISTER_URL} from "../utils/globalConfig.ts";
 import toast from "react-hot-toast";
 
 // We need a reducer function for useReducer hook
@@ -106,4 +106,23 @@ const AuthContextProvider = ({ children }: IProps) => {
             toast.success('Register was successful. Please Login.');
             navigate(PATH_AFTER_REGISTER);
         }, []);
+
+    // Login Method
+    const login = useCallback(async (userName: string, password: string) => {
+        const response = await axiosInstance.post<ILoginResponseDto>(LOGIN_URL, {
+            userName,
+            password,
+        });
+        toast.success('Login was successful');
+        // In response, we receive jwt token and user data
+        const { newToken, userInfo } = response.data;
+        setSession(newToken);
+        dispatch({
+            type: IAuthContextActionTypes.LOGIN,
+            payload: userInfo,
+        });
+        navigate(PATH_AFTER_LOGIN);
+    }, []);
+
+    // Logout Method
 };
