@@ -9,7 +9,14 @@ import {createContext, ReactNode, useCallback, useEffect, useReducer} from "reac
 import {useNavigate} from "react-router-dom";
 import {getSession, setSession} from "./auth.utils.ts";
 import axiosInstance from "../utils/axiosInstance.ts";
-import {LOGIN_URL, ME_URL, PATH_AFTER_LOGIN, PATH_AFTER_REGISTER, REGISTER_URL} from "../utils/globalConfig.ts";
+import {
+    LOGIN_URL,
+    ME_URL,
+    PATH_AFTER_LOGIN,
+    PATH_AFTER_LOGOUT,
+    PATH_AFTER_REGISTER,
+    REGISTER_URL
+} from "../utils/globalConfig.ts";
 import toast from "react-hot-toast";
 
 // We need a reducer function for useReducer hook
@@ -125,4 +132,25 @@ const AuthContextProvider = ({ children }: IProps) => {
     }, []);
 
     // Logout Method
+    const logout = useCallback(() => {
+        setSession(null);
+        dispatch({
+            type: IAuthContextActionTypes.LOGOUT,
+        });
+        navigate(PATH_AFTER_LOGOUT);
+    }, []);
+
+    // We create an object for values of context provider
+    // This will keep our code more readable
+    const valuesObject = {
+        isAuthenticated: state.isAuthenticated,
+        isAuthLoading: state.isAuthLoading,
+        user: state.user,
+        register,
+        login,
+        logout,
+    };
+    return <AuthContext.Provider value={valuesObject}>{children}</AuthContext.Provider>
 };
+
+export default AuthContextProvider;
