@@ -40,7 +40,23 @@ const GlobalRouter = () => {
                     <Route path={PATH_DASHBOARD.myLogs} element={<MyLogsPage />} />
                     <Route path={PATH_DASHBOARD.user} element={<UserPage />} />
                 </Route>
+                <Route element={<AuthGuard roles={managerAccessRoles} /> }>
+                    <Route path={PATH_DASHBOARD.manager} element={<ManagerPage />} />
+                </Route>
+                <Route element={<AuthGuard roles={adminAccessRoles} /> }>
+                    <Route path={PATH_DASHBOARD.usersManagement} element={<UsersManagementPage />} />
+                    <Route path={PATH_DASHBOARD.updateRole} element={<UpdateRolePage />} />
+                    <Route path={PATH_DASHBOARD.allMessages} element={<AllMessagesPage />} />
+                    <Route path={PATH_DASHBOARD.systemLogs} element={<SystemLogsPage />} />
+                    <Route path={PATH_DASHBOARD.admin} element={<AdminPage />} />
+                </Route>
+                <Route element={<AuthGuard roles={ownerAccessRoles} /> }>
+                    <Route path={PATH_DASHBOARD.owner} element={<OwnerPage />} />
+                </Route>
 
+                {/* Catch all 404 */}
+                <Route path={PATH_PUBLIC.notFound} element={<NotFoundPage />} />
+                <Route path='*' element={<Navigate to={PATH_PUBLIC.notFound} replace /> } />
             </Route>
         </Routes>
     );
