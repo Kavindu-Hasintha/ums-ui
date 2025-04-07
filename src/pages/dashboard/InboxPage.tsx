@@ -60,8 +60,8 @@ const InboxPage = () => {
               )}
             </span>
                         <span className='col-span-4'>{item.text}</span>
-                        <span>{item.senderUserName}</span>
-                        <span>{item.receiverUserName}</span>
+                        <span>{item.senderUsername}</span>
+                        <span>{item.receiverUsername}</span>
                     </div>
                 ))}
             </div>
