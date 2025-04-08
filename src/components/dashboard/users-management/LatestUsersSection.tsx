@@ -18,7 +18,7 @@ const LatestUsersSection = ({ usersList }: IProps) => {
             {selectedUsers.slice(0, 7).map((item) => (
                 <div key={item.id} className='bg-gray-100 p-2 my-4 rounded-md'>
                     <div className='flex justify-between items-center'>
-                        <span className='text-lg font-bold'>{item.userName}</span>
+                        <span className='text-lg font-bold'>{item.username}</span>
                         <span className='px-2 text-sm text-white bg-purple-500 rounded-xl'>{moment(item.createdAt).fromNow()}</span>
                     </div>
                     <h6>

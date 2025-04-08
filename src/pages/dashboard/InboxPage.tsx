@@ -53,7 +53,7 @@ const InboxPage = () => {
                     <div key={item.id} className='grid grid-cols-8 p-2 border-2 border-gray-200 rounded-lg'>
                         <span>{moment(item.createdAt).fromNow()}</span>
                         <span>
-              {item.senderUserName === user?.userName ? (
+              {item.senderUsername === user?.userName ? (
                   <MdOutput className='text-2xl text-purple-500' />
               ) : (
                   <MdInput className='text-2xl text-green-500' />

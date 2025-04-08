@@ -1,10 +1,10 @@
 export interface ISendMessageDto {
-    receiverUserName: string;
+    receiverUsername: string;
     text: string;
 }
 
 export interface IMessageDto extends ISendMessageDto {
     id: number;
-    senderUserName: string;
+    senderUsername: string;
     createdAt: string;
 }

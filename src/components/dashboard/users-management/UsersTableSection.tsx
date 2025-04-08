@@ -45,7 +45,7 @@ const UsersTableSection = ({ usersList }: IProps) => {
                     className='grid grid-cols-7 px-2 h-12 my-1 border border-gray-200 hover:bg-gray-200 rounded-md'
                 >
                     <div className='flex items-center'>{index + 1}</div>
-                    <div className='flex items-center font-semibold'>{user.userName}</div>
+                    <div className='flex items-center font-semibold'>{user.username}</div>
                     <div className='flex items-center'>{user.firstName}</div>
                     <div className='flex items-center'>{user.lastName}</div>
                     <div className='flex items-center'>{moment(user.createdAt).format('YYYY-MM-DD|HH:mm')}</div>
@@ -55,7 +55,7 @@ const UsersTableSection = ({ usersList }: IProps) => {
                     <div className='flex items-center'>
                         <Button
                             label='Update Role'
-                            onClick={() => navigate(`/dashboard/update-role/${user.userName}`)}
+                            onClick={() => navigate(`/dashboard/update-role/${user.username}`)}
                             type='button'
                             variant='primary'
                             disabled={!isAuthorizedForUpdateRole(loggedInUser!.roles[0], user.roles[0])}
